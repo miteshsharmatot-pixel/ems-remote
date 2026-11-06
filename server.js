@@ -4,7 +4,7 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import { mcpAuthRouter, getOAuthProtectedResourceMetadataUrl } from "@modelcontextprotocol/sdk/server/auth/router.js";
 import { requireBearerAuth } from "@modelcontextprotocol/sdk/server/auth/middleware/bearerAuth.js";
 
-import { PORT, HOST, PUBLIC_URL, EMS_BASE_URL } from "./lib/config.js";
+import { PORT, HOST, PUBLIC_URL, EMS_BASE_URL, DATABASE_URL } from "./lib/config.js";
 import { flushAll } from "./lib/db.js";
 import { closeAll } from "./lib/browser.js";
 import { EmsOAuthProvider, loginRouter } from "./lib/oauth.js";
@@ -56,7 +56,7 @@ const notAllowed = (_req, res) => res.status(405).json({ jsonrpc: "2.0", error: 
 app.get("/mcp", notAllowed);
 app.delete("/mcp", notAllowed);
 
-app.get("/health", (_req, res) => res.json({ ok: true }));
+app.get("/health", (_req, res) => res.json({ ok: true, storage: DATABASE_URL ? "postgres" : "files" }));
 
 // Can this host reach EMS at all? (no login, no data - just the HTTP status of the login page)
 app.get("/health/ems", async (_req, res) => {
