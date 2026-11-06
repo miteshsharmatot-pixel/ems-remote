@@ -1,0 +1,17 @@
+# Render Blueprint: New -> Blueprint -> pick the repo. Then paste DATABASE_URL when asked.
+services:
+  - type: web
+    name: ems-task-filler
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: SECRET              # generated once by Render; do not change it (it encrypts stored EMS passwords)
+        generateValue: true
+      - key: DATABASE_URL        # free Postgres connection string (e.g. Neon); keeps users/tokens across restarts
+        sync: false
+      - key: MAX_CONCURRENT_JOBS # free instances have ~512 MB RAM: one Chromium job at a time
+        value: "1"
+      - key: EMS_BASE_URL
+        value: https://ems.theonetechnologies.co.in

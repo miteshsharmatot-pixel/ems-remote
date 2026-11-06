@@ -1,0 +1,18 @@
+{
+  "name": "ems-task-filler-remote-mcp",
+  "version": "2.0.0",
+  "description": "Multi-user remote MCP server (Streamable HTTP + OAuth) for EMS task entry, hostable behind IIS",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "postinstall": "playwright install chromium",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "express": "^4.21.0",
+    "pg": "^8.23.1",
+    "playwright": "^1.48.0",
+    "zod": "^3.23.8"
+  }
+}
