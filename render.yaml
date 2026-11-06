@@ -13,5 +13,7 @@ services:
         sync: false
       - key: MAX_CONCURRENT_JOBS # free instances have ~512 MB RAM: one Chromium job at a time
         value: "1"
+      - key: KEEP_ALIVE          # app pings its own /health every 8 min so the free instance does not sleep
+        value: "1"
       - key: EMS_BASE_URL
         value: https://ems.theonetechnologies.co.in

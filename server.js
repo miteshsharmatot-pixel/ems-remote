@@ -70,6 +70,13 @@ app.get("/health/ems", async (_req, res) => {
 
 const httpServer = app.listen(PORT, HOST, () => console.log(`EMS MCP listening on ${HOST}:${PORT} (public: ${PUBLIC_URL}/mcp)`));
 
+// Render's free plan sleeps an instance after ~15 min without inbound requests. A request to our own public URL goes
+// through Render's proxy, so it counts as traffic. Opt-in: set KEEP_ALIVE=1 (render.yaml does).
+if (process.env.KEEP_ALIVE) {
+  const ping = () => fetch(`${PUBLIC_URL}/health`, { signal: AbortSignal.timeout(15000) }).catch(() => {});
+  setInterval(ping, 8 * 60 * 1000).unref();
+}
+
 async function shutdown() {
   await flushAll();
   httpServer.close();

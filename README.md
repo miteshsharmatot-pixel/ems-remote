@@ -89,8 +89,10 @@ Needs the code in a **private** GitHub repo (this folder has no secrets; never c
 4. **Connect clients** with `https://<name>.onrender.com/mcp` (see section 4).
 
 Free-plan limits: the service sleeps after ~15 min idle (first call then takes ~30-60 s while it wakes); about 512 MB RAM, so the
-login/leave browser jobs run one at a time (`MAX_CONCURRENT_JOBS=1`). To avoid sleeping, ping `/health` every 5 min with a free
-uptime monitor, or use a paid instance.
+login/leave browser jobs run one at a time (`MAX_CONCURRENT_JOBS=1`). `render.yaml` sets `KEEP_ALIVE=1`, so the app pings its own
+`/health` every 8 min and stays awake. If the instance is restarted or redeployed it can still be asleep until the next request;
+an optional free uptime monitor (UptimeRobot, cron-job.org) hitting `/health` every 5 min covers that too. A free instance has
+750 hours/month, enough for one service running 24/7 (all free services in the workspace share that).
 
 ## Safety behaviour
 - Tasks and leaves are saved immediately (no confirmation step); `preview: true` on `ems_fill_tasks` / `ems_copy_tasks` shows what would be saved.
