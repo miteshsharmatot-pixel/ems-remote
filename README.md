@@ -10,7 +10,7 @@ MCP client --HTTPS--> IIS (reverse proxy) --> Node service :3000 --> EMS
 ## What it does
 **Tasks:** `ems_search_projects`, `ems_get_day_tasks`, `ems_fill_tasks`, `ems_edit_task` (edit/delete), `ems_copy_tasks`,
 `ems_task_report` (list / missing days / hours per project), `ems_template`
-**Time & people:** `ems_tracker` (time left to 9:30), `ems_attendance`, `ems_my_projects`, `ems_bugs`
+**Time & people:** `ems_tracker` (time left to 9:30), `ems_tracker_activity` (work blocks + gaps, for drafting tasks from the tracker), `ems_attendance`, `ems_my_projects`, `ems_bugs`
 **Leaves:** `ems_get_leave_balance`, `ems_get_leave_options`, `ems_prepare_leave`, `ems_submit_leave`, `ems_discard_leave`
 **Privacy:** `ems_forget_me`
 
