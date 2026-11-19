@@ -95,6 +95,7 @@ an optional free uptime monitor (UptimeRobot, cron-job.org) hitting `/health` ev
 750 hours/month, enough for one service running 24/7 (all free services in the workspace share that).
 
 ## Safety behaviour
+- A task added without a duration shares the rest of the day up to 8:45 (set `DEFAULT_DAY_MINUTES` to change it); if the day is already full, nothing is saved.
 - Tasks and leaves are saved immediately (no confirmation step); `preview: true` on `ems_fill_tasks` / `ems_copy_tasks` shows what would be saved.
 - Nothing is saved if a project is unmatched or ambiguous, or a task type/status is unknown. Exact duplicates are skipped.
 - Approved tasks are locked; only pending tasks can be edited or deleted.
